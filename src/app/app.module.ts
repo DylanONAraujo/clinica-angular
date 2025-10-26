@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VexModule } from '../@vex/vex.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CustomLayoutModule } from './custom-layout/custom-layout.module';
+import { CustomLayoutModule } from './views/custom-layout/custom-layout.module';
+import { ClienteComponent } from './views/pages/cliente/cliente/cliente.component';
+import { MedicoComponent } from './views/pages/medico/medico/medico.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ClienteComponent, MedicoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

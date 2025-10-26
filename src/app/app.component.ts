@@ -12,6 +12,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SplashScreenService } from '../@vex/services/splash-screen.service';
 import { Style, StyleService } from '../@vex/services/style.service';
 import { ConfigName } from '../@vex/interfaces/config-name.model';
+import icWork from '@iconify/icons-ic/baseline-work';
 
 @Component({
   selector: 'vex-root',
@@ -79,9 +80,21 @@ export class AppComponent {
     this.navigationService.items = [
       {
         type: 'link',
-        label: 'Dashboard',
-        route: '/',
+        label: 'Painel',
+        route: '/painel',
         icon: icLayers
+      },
+      {
+        type: 'link',
+        label: 'Medico',
+        route: '/medico',
+        icon: icWork
+      },
+      {
+        type: 'link',
+        label: 'Cliente',
+        route: '/cliente',
+        icon: icWork
       }
     ];
   }
