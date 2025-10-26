@@ -2,6 +2,7 @@ import { Component, ElementRef, HostBinding, Input, OnInit } from '@angular/core
 import { LayoutService } from '../../services/layout.service';
 import icBookmarks from '@iconify/icons-ic/twotone-bookmarks';
 import emojioneUS from '@iconify/icons-emojione/flag-for-flag-united-states';
+import emojioneBR from '@iconify/icons-emojione/flag-for-flag-brazil';
 import emojioneDE from '@iconify/icons-emojione/flag-for-flag-germany';
 import icMenu from '@iconify/icons-ic/twotone-menu';
 import { ConfigService } from '../../services/config.service';
@@ -41,6 +42,7 @@ export class ToolbarComponent implements OnInit {
 
   icSearch = icSearch;
   icBookmarks = icBookmarks;
+  emojioneBR = emojioneBR;
   emojioneUS = emojioneUS;
   emojioneDE = emojioneDE;
   icMenu = icMenu;
