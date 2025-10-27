@@ -15,6 +15,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { IconModule } from '@visurel/iconify-angular';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AppComponent, ClienteComponent, MedicoComponent, ModalCadastrarClienteComponent, ModalCadastrarMedicoComponent],
@@ -27,6 +33,13 @@ import { IconModule } from '@visurel/iconify-angular';
     MatIconModule,
     MatButtonModule,
     IconModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatInputModule,
 
     // Vex
     VexModule,
