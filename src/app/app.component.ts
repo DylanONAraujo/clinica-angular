@@ -80,12 +80,6 @@ export class AppComponent {
     this.navigationService.items = [
       {
         type: 'link',
-        label: 'Painel',
-        route: '/painel',
-        icon: icLayers
-      },
-      {
-        type: 'link',
         label: 'Medico',
         route: '/medico',
         icon: icWork
