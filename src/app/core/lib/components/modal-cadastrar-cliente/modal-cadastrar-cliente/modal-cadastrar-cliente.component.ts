@@ -3,6 +3,7 @@ import { stagger60ms } from '../../../../../../@vex/animations/stagger.animation
 import { fadeInUp400ms } from '../../../../../../@vex/animations/fade-in-up.animation';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class ModalCadastrarClienteComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private cd: ChangeDetectorRef,private fb: FormBuilder) {
+  constructor(private cd: ChangeDetectorRef,private fb: FormBuilder, private readonly dialogRef: MatDialogRef<ModalCadastrarClienteComponent>) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
       cpf: ['', Validators.required],
@@ -32,6 +33,10 @@ export class ModalCadastrarClienteComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  cadastrar(){
+    this.dialogRef.close(this.form?.value)
   }
 
 }

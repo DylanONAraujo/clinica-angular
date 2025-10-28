@@ -36,14 +36,13 @@
           </mat-form-field>
         </div>
 
-        <div class="py-4" fxLayout="column">
-          <mat-form-field appearance="legacy" class="full-width">
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+          <mat-form-field appearance="legacy" fxFlex="auto">
             <mat-label>Telefone</mat-label>
             <input matInput required formControlName="telefone" placeholder='(00) 90000-0000' />
           </mat-form-field>
-        </div>
 
-        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+
           <mat-form-field appearance="legacy" fxFlex="auto">
             <mat-label>CEP</mat-label>
             <input matInput required formControlName="cep" placeholder='00000-000' />
@@ -91,6 +90,6 @@
 
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancelar</button>
-    <button mat-button mat-raised-button color="primary" [disabled]="form.invalid">Salvar</button>
+    <button mat-button mat-raised-button color="primary" [disabled]="form.invalid" (click)="cadastrar()">Salvar</button>
   </mat-dialog-actions>
 </div>
