@@ -4,6 +4,7 @@ import { fadeInUp400ms } from '../../../../../../@vex/animations/fade-in-up.anim
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ClienteService } from '../../../../service/cliente/cliente.service';
 
 @Component({
   selector: 'vex-modal-cadastrar-medico',
@@ -14,7 +15,7 @@ export class ModalCadastrarMedicoComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private cd: ChangeDetectorRef,private fb: FormBuilder, private readonly dialogRef: MatDialogRef<ModalCadastrarMedicoComponent>) { 
+  constructor(private cd: ChangeDetectorRef,private fb: FormBuilder, private readonly dialogRef: MatDialogRef<ModalCadastrarMedicoComponent>, private clienteService: ClienteService) { 
     this.form = this.fb.group({
       nome: ['', Validators.required],
       cpf: ['', Validators.required],
@@ -32,6 +33,15 @@ export class ModalCadastrarMedicoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  buscarCep(cep: string) {
+    this.clienteService.buscarCep(cep).subscribe(response =>{
+      console.log("Tudo certo!");
+      console.log(response);
+    }, (error)=> {
+      console.log(error);
+    });
   }
 
   cadastrar(){

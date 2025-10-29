@@ -4,6 +4,7 @@ import { fadeInUp400ms } from '../../../../../../@vex/animations/fade-in-up.anim
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ClienteService } from '../../../../service/cliente/cliente.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class ModalCadastrarClienteComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private cd: ChangeDetectorRef,private fb: FormBuilder, private readonly dialogRef: MatDialogRef<ModalCadastrarClienteComponent>) {
+  constructor(private cd: ChangeDetectorRef,private fb: FormBuilder, private readonly dialogRef: MatDialogRef<ModalCadastrarClienteComponent>, private clienteService: ClienteService) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
       cpf: ['', Validators.required],
@@ -23,18 +24,52 @@ export class ModalCadastrarClienteComponent implements OnInit {
       sexo: [''],
       telefone: ['', Validators.required],
       cep: ['', Validators.required],
-      estado: ['', Validators.required],
-      cidade: ['', Validators.required],
-      bairro: ['', Validators.required],
-      complemento: ['', Validators.required],
       logradouro: ['', Validators.required],
       numero: ['', Validators.required],
+      complemento: ['', Validators.required],
+      bairro: ['', Validators.required],
+      cidade: ['', Validators.required],
+      estado: ['', Validators.required],
     });
    }
 
   ngOnInit(): void {
   }
 
+
+  buscarCep() {
+    let cep = this.form?.get("cep")?.value
+    if(cep.length!=8){
+      // this.resetForm(form);
+      return;
+    }
+    this.clienteService.buscarCep(cep).subscribe(response =>{
+      // console.log(response)
+      // console.log('formulario: ' , this.form),
+      this.form.patchValue({
+          cep: response.cep,
+          logradouro: response.logradouro,
+          bairro: response.bairro,
+          cidade: response.localidade,
+          estado: response.estado, 
+      })
+    }, (error)=> {
+      console.log(error);
+    });
+  }
+
+  // resetForm(form){
+  //   this.form.patchValue({
+  //   cep: {
+  //         logradouro: null,
+  //         cep: null,
+  //         bairro: null,
+  //         cidade: null,
+  //         estado: null,
+  //       }
+  //       })
+        
+  // }
   cadastrar(){
     this.dialogRef.close(this.form?.value)
   }
