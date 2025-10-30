@@ -24,12 +24,12 @@ export class ModalCadastrarClienteComponent implements OnInit {
       sexo: [''],
       telefone: ['', Validators.required],
       cep: ['', Validators.required],
-      logradouro: ['', Validators.required],
+      logradouro: [''],
       numero: ['', Validators.required],
-      complemento: ['', Validators.required],
-      bairro: ['', Validators.required],
-      cidade: ['', Validators.required],
-      estado: ['', Validators.required],
+      complemento: [''],
+      bairro: [''],
+      cidade: [''],
+      estado: [''],
     });
    }
 
@@ -40,7 +40,7 @@ export class ModalCadastrarClienteComponent implements OnInit {
   buscarCep() {
     let cep = this.form?.get("cep")?.value
     if(cep.length!=8){
-      // this.resetForm(form);
+      // this.resetaForm(form?);
       return;
     }
     this.clienteService.buscarCep(cep).subscribe(response =>{
@@ -58,15 +58,13 @@ export class ModalCadastrarClienteComponent implements OnInit {
     });
   }
 
-  // resetForm(form){
+  // resetaForm(form){
   //   this.form.patchValue({
-  //   cep: {
   //         logradouro: null,
   //         cep: null,
   //         bairro: null,
   //         cidade: null,
   //         estado: null,
-  //       }
   //       })
         
   // }

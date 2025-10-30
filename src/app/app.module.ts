@@ -22,8 +22,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 
+import { ConfirmacaoModalComponent } from './core/lib/components/confirmacao-modal/confirmacao-modal/confirmacao-modal.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
+
 @NgModule({
-  declarations: [AppComponent, ClienteComponent, MedicoComponent, ModalCadastrarClienteComponent, ModalCadastrarMedicoComponent],
+  declarations: [AppComponent, ClienteComponent, MedicoComponent, ModalCadastrarClienteComponent, ModalCadastrarMedicoComponent, ConfirmacaoModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,6 +48,10 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatNativeDateModule,
     MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    FlexLayoutModule,
 
     // Vex
     VexModule,
