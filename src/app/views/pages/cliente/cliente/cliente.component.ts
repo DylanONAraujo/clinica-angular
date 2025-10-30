@@ -22,7 +22,6 @@ export class ClienteComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
  form: FormGroup;
- termoPesquisa: string = '';
  
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, private ClienteService: ClienteService) {
@@ -48,6 +47,11 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     filtro: ['']
   });
 
+    this.form.get('filtro')?.valueChanges.subscribe(valor => {
+      this.dataSource.filter = valor.trim().toLowerCase();
+    });
+
+
   }
 
   ngAfterViewInit() {
@@ -69,25 +73,43 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = ''; 
   }
 
-
-  carregarClientes(): void {
-    this.ClienteService.listarTodos().subscribe(clientes => {
-      this.dataSource.data = clientes;
-    });
-  }
-
   openDialog(){
-    const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {width: '600px'})
+    const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, { width: '600px' });
 
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'atualizar') {
-        this.carregarClientes();
+    dialogRef.afterClosed().subscribe((novoCliente: Cliente) => {
+      if (novoCliente) {
+        this.clientes.push(novoCliente); // mock de inclusão
+        this.dataSource.data = [...this.clientes]; // atualiza tabela
         this.limparFiltro();
       }
     });
 
   }
+
+  deletar(cliente: Cliente) {
+    const index = this.clientes.indexOf(cliente);
+    if (index > -1) {
+      this.clientes.splice(index, 1); // mock de deleção
+      this.dataSource.data = [...this.clientes]; // atualiza tabela
+    }
+  }
+
+  editar(cliente: Cliente): void {
+  const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {
+    width: '600px',
+    data: cliente // envia o cliente para o modal
+  });
+
+  dialogRef.afterClosed().subscribe((clienteEditado: Cliente) => {
+    if (clienteEditado) {
+      const index = this.clientes.indexOf(cliente);
+      if (index > -1) {
+        this.clientes[index] = clienteEditado; // substitui no array
+        this.dataSource.data = [...this.clientes]; // atualiza tabela
+      }
+    }
+  });
+}
 
 
 }

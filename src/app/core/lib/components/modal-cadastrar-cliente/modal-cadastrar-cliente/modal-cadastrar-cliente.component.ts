@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { stagger60ms } from '../../../../../../@vex/animations/stagger.animation';
 import { fadeInUp400ms } from '../../../../../../@vex/animations/fade-in-up.animation';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ClienteService } from '../../../../service/cliente/cliente.service';
+import { Cliente } from '../../../../model/cliente';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class ModalCadastrarClienteComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private cd: ChangeDetectorRef,private fb: FormBuilder, private readonly dialogRef: MatDialogRef<ModalCadastrarClienteComponent>, private clienteService: ClienteService) {
+  constructor(private cd: ChangeDetectorRef,private fb: FormBuilder, private readonly dialogRef: MatDialogRef<ModalCadastrarClienteComponent>, private clienteService: ClienteService, @Inject(MAT_DIALOG_DATA) public data: Cliente
+) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
       cpf: ['', Validators.required],
@@ -33,8 +35,14 @@ export class ModalCadastrarClienteComponent implements OnInit {
     });
    }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
+
+  salvar(): void {
+  const clienteEditado: Cliente = this.form.value;
+  clienteEditado.id = this.data?.id || 0; // mantém o ID original
+  this.dialogRef.close(clienteEditado);
+}
 
 
   buscarCep() {
@@ -43,6 +51,7 @@ export class ModalCadastrarClienteComponent implements OnInit {
       // this.resetaForm(form?);
       return;
     }
+
     this.clienteService.buscarCep(cep).subscribe(response =>{
       // console.log(response)
       // console.log('formulario: ' , this.form),
