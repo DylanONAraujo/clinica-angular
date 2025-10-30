@@ -22,6 +22,7 @@ export class ClienteComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
  form: FormGroup;
+ termoPesquisa: string = '';
  
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, private ClienteService: ClienteService) {
@@ -42,6 +43,11 @@ export class ClienteComponent implements OnInit, AfterViewInit {
       { id: 2, nome: 'Jorel Santos', cpf: '109.876.543-21', dtNascimento: new Date('25-12-2025'), telefone:'(12)93456-7891', cep: '87654-321'},
     ];
     this.dataSource = new MatTableDataSource(this.clientes);
+
+    this.form = this.fb.group({
+    filtro: ['']
+  });
+
   }
 
   ngAfterViewInit() {
@@ -58,12 +64,30 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     }
   }
 
+  limparFiltro(){
+    this.form.get('filtro')?.setValue('');
+    this.dataSource.filter = ''; 
+  }
+
+
+  carregarClientes(): void {
+    this.ClienteService.listarTodos().subscribe(clientes => {
+      this.dataSource.data = clientes;
+    });
+  }
 
   openDialog(){
     const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {width: '600px'})
-  }
 
-  
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'atualizar') {
+        this.carregarClientes();
+        this.limparFiltro();
+      }
+    });
+
+  }
 
 
 }

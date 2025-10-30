@@ -1,13 +1,14 @@
 
+<form [formGroup]='form'>
 <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" class="linha-formulario">
   <div class="col-md-6" fxFlex="80" style="margin-left: 16px;">
     <mat-form-field class="input-filtro" appearance="standard" fxFlex>
       <mat-label class="label">Pesquisar Cliente</mat-label>
-      <input matInput (keyup)="applyFilter($event)" formControlName="filtro" #input />
+      <input matInput  (keyup)="applyFilter($event)" formControlName="filtro" #input />
     </mat-form-field>
   </div>
-  <div class="col">
-    <button mat-button fxLayout="row" fxLayoutGap="8px" fxFlex="auto" class="botao-estilo">
+  <div class="col" >
+    <button mat-button  (click)="limparFiltro()" mat-raised-button fxLayout="row" fxLayoutGap="8px" fxFlex="auto" class="botao-estilo">
       Limpar <mat-icon>backspace</mat-icon>
     </button>
   </div>
@@ -22,6 +23,7 @@
     </button>
   </div>
 </div>
+</form>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
