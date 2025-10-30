@@ -63,9 +63,9 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {width: '600px'})
   }
 
+  
+
 
 }
-function carregarClientes() {
-  throw new Error('Function not implemented.');
-}
+
 
