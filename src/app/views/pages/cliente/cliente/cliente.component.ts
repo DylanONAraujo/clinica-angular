@@ -69,6 +69,10 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = ''; 
   }
 
+  limparDados(){
+    this.clientes.splice(1);
+  }
+
 
   carregarClientes(): void {
     this.ClienteService.listarTodos().subscribe(clientes => {
@@ -80,13 +84,12 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {width: '600px'})
 
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'atualizar') {
-        this.carregarClientes();
+    dialogRef.afterClosed().subscribe((novoCliente: Cliente) => {
+      if (novoCliente){
+        this.clientes.push(novoCliente);
         this.limparFiltro();
       }
     });
-
   }
 
 
