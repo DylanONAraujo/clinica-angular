@@ -27,6 +27,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 
 
@@ -52,6 +53,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSortModule,
     MatTableModule,
     FlexLayoutModule,
+    NgxMaskModule.forRoot(),
 
     // Vex
     VexModule,

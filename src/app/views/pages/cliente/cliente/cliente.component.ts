@@ -40,10 +40,10 @@ export class ClienteComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.clientes = [
       { id: 1, nome: 'João Silva', cpf: '123.456.789-10', dtNascimento: new Date('01-10-2023'), telefone:'(10) 98765-4321', cep: '12345-678'},
-      { id: 2, nome: 'Jorel Santos', cpf: '109.876.543-21', dtNascimento: new Date('25-12-2025'), telefone:'(12)93456-7891', cep: '87654-321'},
     ];
     this.dataSource = new MatTableDataSource(this.clientes);
-
+    console.log(this.clientes);
+    
     this.form = this.fb.group({
     filtro: ['']
   });
@@ -69,12 +69,16 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = ''; 
   }
 
-  limparDados(){
-    this.clientes.splice(1);
+  limparDados(cliente: Cliente){
+    let indiceRemover = this.clientes.indexOf(cliente);
+    if (indiceRemover > -1){
+          this.clientes.splice(indiceRemover, 1);
+          this.dataSource = new MatTableDataSource(this.clientes);
+    } 
   }
 
 
-  carregarClientes(): void {
+  carregarClientes(){
     this.ClienteService.listarTodos().subscribe(clientes => {
       this.dataSource.data = clientes;
     });
@@ -87,6 +91,7 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((novoCliente: Cliente) => {
       if (novoCliente){
         this.clientes.push(novoCliente);
+        this.dataSource = new MatTableDataSource(this.clientes);
         this.limparFiltro();
       }
     });
