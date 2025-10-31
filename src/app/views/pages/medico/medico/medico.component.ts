@@ -14,7 +14,7 @@ import { MedicoService } from '../../../../core/service/medico/medico.service';
   styleUrls: ['./medico.component.scss']
 })
 export class MedicoComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['nome', 'especialidade', 'disponibilidade', 'telefone', 'hrTrabalho', 'actions'];
+  displayedColumns: string[] = ['nome', 'especialidade', 'disponibilidade', 'telefone', 'hrTrabalho'];
     dataSource!: MatTableDataSource<Medico>;
     medicos: Medico[] = []; // alterar para receber do backend - Medico
 
@@ -37,15 +37,15 @@ export class MedicoComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.medicos = [
-      { id: 1, nome: 'Dra. Ana Beatriz Lima', especialidade: 'Pediatria', disponibilidade: 'Seg–Sex, 8h–16h', telefone:'(34) 99876-1234', hrTrabalho: 'Sim'},
+      { id: 1, nome: 'Dra. Ana Beatriz Lima', especialidade: 'Pediatria', hrTrabalho: 'Seg–Sex, 8h–16h', telefone:'(34) 99876-1234', disponibilidade:  'Sim'},
 
-      { id: 2, nome: 'Dr. Carlos Mendes', especialidade: 'Ortopedia', disponibilidade: 'Ter–Qui, 13h–18h', telefone:'(34) 99123-4567', hrTrabalho: 'Não'},
+      { id: 2, nome: 'Dr. Carlos Mendes', especialidade: 'Ortopedia', hrTrabalho: 'Ter–Qui, 13h–18h', telefone:'(34) 99123-4567', disponibilidade: 'Não'},
 
-      { id: 3, nome: 'Dra. Fernanda Souza', especialidade: 'Dermatologia', disponibilidade: 'Seg–Sex, 9h–17h', telefone:'(34) 99654-7890', hrTrabalho: 'Sim'},
+      { id: 3, nome: 'Dra. Fernanda Souza', especialidade: 'Dermatologia', hrTrabalho: 'Seg–Sex, 9h–17h', telefone:'(34) 99654-7890', disponibilidade: 'Sim'},
 
-      { id: 4, nome: 'Dr. João Vitor Rocha', especialidade: 'Cardiologia', disponibilidade: 'Seg–Qua, 10h–15h', telefone:'(34) 99234-5678', hrTrabalho: 'Sim'},
+      { id: 4, nome: 'Dr. João Vitor Rocha', especialidade: 'Cardiologia', hrTrabalho: 'Seg–Qua, 10h–15h', telefone:'(34) 99234-5678', disponibilidade: 'Sim'},
 
-      { id: 5, nome: 'Dra. Luana Martins', especialidade: 'Ginecologia', disponibilidade: 'Qua–Sex, 14h–20h', telefone:'(34) 99543-2109', hrTrabalho: 'Não'},
+      { id: 5, nome: 'Dra. Luana Martins', especialidade: 'Ginecologia', hrTrabalho: 'Qua–Sex, 14h–20h', telefone:'(34) 99543-2109', disponibilidade: 'Não'},
     ];
     this.dataSource = new MatTableDataSource(this.medicos);
     console.log(this.medicos);

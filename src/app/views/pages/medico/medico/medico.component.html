@@ -49,13 +49,13 @@
     </ng-container>
 
 
-    <!-- Actions Column -->
+    
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações </th>
       <td mat-cell *matCellDef="let cliente" class="icones-acoes">
-        <!-- <button mat-icon-button>
+        <button mat-icon-button>
           <mat-icon color="primary">edit</mat-icon>
-        </button> -->
+        </button>
         <button mat-icon-button (click)="limparDados(cliente)">
           <mat-icon color="warn">delete</mat-icon>
         </button>
