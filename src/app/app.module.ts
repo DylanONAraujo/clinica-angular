@@ -15,7 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { IconModule } from '@visurel/iconify-angular';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions, MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,6 +29,10 @@ import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 
+
+const globalFormFieldOptions: MatFormFieldDefaultOptions = {
+  appearance: "standard",
+};
 
 
 @NgModule({
@@ -59,7 +63,11 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     VexModule,
     CustomLayoutModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: globalFormFieldOptions,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

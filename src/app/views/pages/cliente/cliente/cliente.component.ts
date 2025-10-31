@@ -38,9 +38,9 @@ export class ClienteComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.clientes = [
-      { id: 1, nome: 'João Silva', cpf: '123.456.789-10', dtNascimento: new Date('01-10-2023'), telefone:'(10) 98765-4321', cep: '12345-678'},
-    ];
+    // this.clientes = [
+    //   { id: 1, nome: 'João Silva', cpf: '123.456.789-10', dtNascimento: new Date('01-10-2023'), telefone:'(10) 98765-4321', cep: '12345-678'},
+    // ];
     this.dataSource = new MatTableDataSource(this.clientes);
     console.log(this.clientes);
     

@@ -33,7 +33,7 @@ export class ModalCadastrarClienteComponent implements OnInit {
     });
    }
 
-  ngOnInit(){
+  ngOnInit(): void {
   }
 
 
@@ -71,5 +71,4 @@ export class ModalCadastrarClienteComponent implements OnInit {
   cadastrar(){
     this.dialogRef.close(this.form?.value)
   }
-
 }
