@@ -19,7 +19,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions, MatFormFiel
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 
 import { ConfirmacaoModalComponent } from './core/lib/components/confirmacao-modal/confirmacao-modal/confirmacao-modal.component';
@@ -28,15 +28,16 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ModalConfirmarExcluirComponent } from './core/lib/components/modal-cadastrar-cliente/modal-cadastrar-cliente/modal-confirmar-excluir/modal-confirmar-excluir.component';
 
 
-const globalFormFieldOptions: MatFormFieldDefaultOptions = {
+let globalFormFieldOptions: MatFormFieldDefaultOptions = {
   appearance: "standard",
 };
 
 
 @NgModule({
-  declarations: [AppComponent, ClienteComponent, MedicoComponent, ModalCadastrarClienteComponent, ModalCadastrarMedicoComponent, ConfirmacaoModalComponent],
+  declarations: [AppComponent, ClienteComponent, MedicoComponent, ModalCadastrarClienteComponent, ModalCadastrarMedicoComponent, ConfirmacaoModalComponent, ModalConfirmarExcluirComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -66,6 +67,9 @@ const globalFormFieldOptions: MatFormFieldDefaultOptions = {
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: globalFormFieldOptions,
+    },
+    {
+      provide: MAT_DATE_LOCALE, useValue: 'pt-BR'
     },
   ],
   bootstrap: [AppComponent]

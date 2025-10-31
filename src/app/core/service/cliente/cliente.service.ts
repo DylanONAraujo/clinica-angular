@@ -21,12 +21,12 @@ export class ClienteService {
   //   return this.http.delete<Cliente[]>('/api/clientes');
   // }
 
-  listarTodos() {
-    return this.http.get<Cliente[]>('/api/clientes');
-  }
+  // listarTodos() {
+  //   return this.http.get<Cliente[]>('/api/clientes');
+  // }
 
-  cadastrar(cliente: Cliente) {
-    return this.http.post('/api/clientes', cliente);
-  }
+  // cadastrar(cliente: Cliente) {
+  //   return this.http.post('/api/clientes', cliente);
+  // }
 
 }

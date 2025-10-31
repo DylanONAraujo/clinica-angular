@@ -40,12 +40,9 @@ export class ModalCadastrarClienteComponent implements OnInit {
   buscarCep() {
     let cep = this.form?.get("cep")?.value
     if(cep.length!=8){
-      // this.resetaForm(form?);
       return;
     }
     this.clienteService.buscarCep(cep).subscribe(response =>{
-      // console.log(response)
-      // console.log('formulario: ' , this.form),
       this.form.patchValue({
           cep: response.cep,
           logradouro: response.logradouro,
@@ -71,4 +68,5 @@ export class ModalCadastrarClienteComponent implements OnInit {
   cadastrar(){
     this.dialogRef.close(this.form?.value)
   }
+
 }

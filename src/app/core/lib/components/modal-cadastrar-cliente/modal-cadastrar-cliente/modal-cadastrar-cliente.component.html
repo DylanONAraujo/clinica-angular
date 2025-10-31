@@ -24,13 +24,12 @@
               <mat-option value="Outro">Outro</mat-option>
             </mat-select>
           </mat-form-field>
-
         </div>
 
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px">
           <mat-form-field fxFlex="auto">
             <mat-label>Data de Nascimento</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dtNascimento" placeholder='"DD/MM/AAAA"'/>
+            <input matInput [matDatepicker]="picker" formControlName="dtNascimento" placeholder="DD/MM/AAAA"/>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>

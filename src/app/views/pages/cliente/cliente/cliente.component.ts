@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Cliente } from '../../../../core/model/cliente';
 import { ClienteService } from '../../../../core/service/cliente/cliente.service';
+import { ModalConfirmarExcluirComponent } from '../../../../core/lib/components/modal-cadastrar-cliente/modal-cadastrar-cliente/modal-confirmar-excluir/modal-confirmar-excluir.component';
 
 @Component({
   selector: 'vex-cliente',
@@ -22,7 +23,7 @@ export class ClienteComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
  form: FormGroup;
- termoPesquisa: string = '';
+
  
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, private ClienteService: ClienteService) {
@@ -47,7 +48,6 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     this.form = this.fb.group({
     filtro: ['']
   });
-
   }
 
   ngAfterViewInit() {
@@ -69,7 +69,18 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = ''; 
   }
 
-  limparDados(cliente: Cliente){
+
+  confirmarExclusao(cliente: Cliente){
+    const dialogRef = this.dialog.open(ModalConfirmarExcluirComponent, {width: '600px'})
+    dialogRef.afterClosed().subscribe((result: boolean | undefined)=>{
+      if (result){
+        this.limparDados(cliente);
+      }
+    });
+  }
+
+
+  private limparDados(cliente: Cliente){
     let indiceRemover = this.clientes.indexOf(cliente);
     if (indiceRemover > -1){
           this.clientes.splice(indiceRemover, 1);
@@ -77,17 +88,8 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     } 
   }
 
-
-  carregarClientes(){
-    this.ClienteService.listarTodos().subscribe(clientes => {
-      this.dataSource.data = clientes;
-    });
-  }
-
   openDialog(){
     const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {width: '600px'})
-
-
     dialogRef.afterClosed().subscribe((novoCliente: Cliente) => {
       if (novoCliente){
         this.clientes.push(novoCliente);
@@ -98,6 +100,23 @@ export class ClienteComponent implements OnInit, AfterViewInit {
   }
 
 
+
+  editar(cliente: Cliente) {
+  const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {
+    width: '600px',
+    data: cliente 
+  });
+
+    dialogRef.afterClosed().subscribe((clienteEditado: Cliente) => {
+      if (clienteEditado) {
+        let indEditado = this.clientes.indexOf(cliente);
+        if (indEditado > -1) {
+          this.clientes[indEditado] = clienteEditado;
+          this.dataSource = new MatTableDataSource(this.clientes);
+        }
+      }
+    });
+  }
 }
 
 
