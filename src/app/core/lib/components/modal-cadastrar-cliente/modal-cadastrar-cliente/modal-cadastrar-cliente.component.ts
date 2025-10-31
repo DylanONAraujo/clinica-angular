@@ -33,7 +33,7 @@ export class ModalCadastrarClienteComponent implements OnInit {
     });
    }
 
-  ngOnInit(): void {
+  ngOnInit(){
   }
 
 

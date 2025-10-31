@@ -11,7 +11,7 @@ export class MedicoComponent implements OnInit {
 
   constructor(private dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   openDialog(){
