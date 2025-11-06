@@ -36,12 +36,12 @@ export class ClienteComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.clientes = [
-      { id: 1, nome: 'João Silva', cpf: '123.456.789-10', dtNascimento: new Date('01-10-2023'), telefone: '(10) 98765-4321', endereco: { cep: '12345-678' } },
-      { id: 2, nome: 'João Marcos Thomaz Frotté', cpf: '300.629.539-07', dtNascimento: new Date('03/05/1953'), telefone: '(83)9 2483-2341', endereco: { cep: '17021-760' } },
-      { id: 3, nome: 'Brunna Felix Grilo', cpf: '197.816.748-22', dtNascimento: new Date('12/10/1958'), telefone: '(28)9 8574-3838', endereco: { cep: '13070-174' } },
-      { id: 4, nome: 'Rosani de Carvalho Ascar', cpf: '024.517.432-04', dtNascimento: new Date('12/05/1974'), telefone: '(89)9 6968-9188', endereco: { cep: '08031-130' } },
-      { id: 5, nome: 'Dayvid Chaves Souza', cpf: '667.554.440-30', dtNascimento: new Date('09/03/2019'), telefone: '(95)9 8854-4959', endereco: { cep: '12042-020' } },
-      { id: 6, nome: 'Aderbal Lopez Luques', cpf: '248.630.361-83', dtNascimento: new Date('05/17/1968'), telefone: '(42)9 7155-5281', endereco: { cep: '12906-290' } },
+      { id: 1, nome: 'João Silva', cpf: '123.456.789-10', dtNascimento: new Date('01-10-2023'), telefone: '(10) 98765-4321', endereco: { cep: '35702-111' , logradouro: 'Rua Bom Despacho', numero: '15', complemento: 'Casa', bairro: 'Padre Teodoro', cidade:'Sete Lagoas', estado: 'Minas Gerais'}, sexo: 'Masculino' },
+      { id: 2, nome: 'João Marcos Thomaz Frotté', cpf: '300.629.539-07', dtNascimento: new Date('03/05/1953'), telefone: '(83)9 2483-2341', endereco: { cep: '17021-760' , logradouro: 'Rua Sebastião Theodoro de Freitas', numero: '145', complemento: 'Casa', bairro: 'Vila Garcia', cidade:'Bauru', estado: 'São Paulo'}, sexo: 'Masculino'},
+      { id: 3, nome: 'Brunna Felix Grilo', cpf: '197.816.748-22', dtNascimento: new Date('12/10/1958'), telefone: '(28)9 8574-3838', endereco: { cep: '13070-174', logradouro: 'Rua Reinaldo Laubenstein- até 531/532', numero: '20', complemento: 'Edificio', bairro: 'Jardim Chapadão', cidade:'Campinas', estado: 'São Paulo'}, sexo: 'Feminino' },
+      { id: 4, nome: 'Rosani de Carvalho Ascar', cpf: '024.517.432-04', dtNascimento: new Date('12/05/1974'), telefone: '(89)9 6968-9188', endereco: { cep: '08031-130', logradouro: 'Rua Biguá', numero: '159', complemento: 'Casa', bairro: 'Vila Nova Curuçá', cidade:'São Paulo', estado: 'São Paulo'}, sexo: 'Feminino'},
+      { id: 5, nome: 'Dayvid Chaves Souza', cpf: '667.554.440-30', dtNascimento: new Date('09/03/2019'), telefone: '(95)9 8854-4959', endereco: { cep: '12042-020', logradouro: 'Rua Bernardus Aperloo', numero: '56', complemento: 'Edificio', bairro: 'Distrito Industrial Willy Conrado Bohlen', cidade:'Taubaté', estado: 'São Paulo'}, sexo: 'Masculino' },
+      { id: 6, nome: 'Aderbal Lopez Luques', cpf: '248.630.361-83', dtNascimento: new Date('05/17/1968'), telefone: '(42)9 7155-5281', endereco: { cep: '12906-290', logradouro: 'Rua Sargento Antônio Esteves', numero: '42', complemento: 'casa', bairro: 'Parque Brasil', cidade:'São Paulo', estado: 'São Paulo'}, sexo: 'Masculino' },
     ];
     this.dataSource = new MatTableDataSource(this.clientes);
     console.log(this.clientes);
