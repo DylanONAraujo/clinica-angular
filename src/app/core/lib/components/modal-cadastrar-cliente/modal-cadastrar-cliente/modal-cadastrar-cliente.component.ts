@@ -17,6 +17,7 @@ export class ModalCadastrarClienteComponent implements OnInit {
 
   form: FormGroup;
   visualizar: boolean = false;
+  modo: 'visualizar' | 'novo' | 'editar' = 'novo';
 
   constructor(private cd: ChangeDetectorRef,
     private fb: FormBuilder,
@@ -43,11 +44,18 @@ export class ModalCadastrarClienteComponent implements OnInit {
   ngOnInit() {
     if(this.data?.cliente){
       this.dadosPreenchidos(this.data.cliente);
-    }
+    
     if (this.data?.visualizar) {
+    this.modo = 'visualizar';
     this.visualizar = true;
     this.form.disable();
-  }
+  }else {
+        this.modo = 'editar';
+      }
+    } else {
+      this.modo = 'novo';
+    }
+
   }
 
 

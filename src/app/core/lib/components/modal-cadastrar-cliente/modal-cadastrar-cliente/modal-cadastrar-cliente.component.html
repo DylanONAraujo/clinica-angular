@@ -1,6 +1,6 @@
 <div>
   <div class="px-6 py-4 border-b" id="title" fxLayout="row" fxLayoutAlign="start center">
-    <h2 class="title m-0">{{ visualizar ? 'Visualizar Cliente' : 'Novo Cliente' }}</h2>
+    <h2 class="title m-0">{{ modo === 'visualizar' ? 'Visualizar Cliente': modo === 'editar' ? 'Alteração de dados':'Novo Cliente' }}</h2>
   </div>
   <mat-dialog-content>
     <div @fadeInUp fxFlex="auto" [formGroup]="form">
@@ -93,8 +93,8 @@
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>{{ visualizar ? 'Fechar' : 'Cancelar' }}</button>
-    <button *ngIf="!visualizar" mat-button mat-raised-button color="primary" [disabled]="form.invalid" (click)="cadastrar()">Salvar</button>
+    <button mat-button mat-dialog-close>{{modo === 'visualizar' ? 'Fechar' : 'Cancelar' }}</button>
+    <button *ngIf="modo !== 'visualizar'" mat-button mat-raised-button color="primary" [disabled]="form.invalid" (click)="cadastrar()">Salvar</button>
   </mat-dialog-actions>
 </div>
 
