@@ -16,12 +16,14 @@ import { Cliente } from '../../../../model/cliente';
 export class ModalCadastrarClienteComponent implements OnInit {
 
   form: FormGroup;
+  visualizar: boolean = false;
 
   constructor(private cd: ChangeDetectorRef,
     private fb: FormBuilder,
     private readonly dialogRef: MatDialogRef<ModalCadastrarClienteComponent>,
     private clienteService: ClienteService, 
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: Cliente) {
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: { cliente: Cliente, visualizar: boolean }
+) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
       cpf: ['', Validators.required],
@@ -39,9 +41,13 @@ export class ModalCadastrarClienteComponent implements OnInit {
    }
 
   ngOnInit() {
-    if(this.data){
-      this.dadosPreenchidos(this.data);
+    if(this.data?.cliente){
+      this.dadosPreenchidos(this.data.cliente);
     }
+    if (this.data?.visualizar) {
+    this.visualizar = true;
+    this.form.disable();
+  }
   }
 
 
@@ -66,8 +72,6 @@ export class ModalCadastrarClienteComponent implements OnInit {
   cadastrar(){
     this.dialogRef.close(this.form?.value)
   }
-
-
 
   dadosPreenchidos(cliente: Cliente) {
   this.form = this.fb.group({

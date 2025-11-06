@@ -5,7 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Medico } from '../../../../core/model/medico';
-import { MedicoService } from '../../../../core/service/medico/medico.service';
 
 @Component({
   selector: 'vex-medico',
@@ -23,7 +22,7 @@ export class MedicoComponent implements OnInit, AfterViewInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private MedicoService: MedicoService) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog) {
 
     this.form = this.fb.group({
       filtro: [''],

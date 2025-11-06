@@ -78,18 +78,19 @@ export class AppComponent {
 
 
     this.navigationService.items = [
+
+      {
+        type: 'link',
+        label: 'Cliente',
+        route: '/cliente',
+        icon: icWork
+      },
       {
         type: 'link',
         label: 'Medico',
         route: '/medico',
         icon: icWork
       },
-      {
-        type: 'link',
-        label: 'Cliente',
-        route: '/cliente',
-        icon: icWork
-      }
     ];
   }
 }

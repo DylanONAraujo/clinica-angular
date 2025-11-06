@@ -28,8 +28,6 @@ export class ClienteComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, private ClienteService: ClienteService) {
 
-    // Assign the data to the data source for the table to render
-
     this.form = this.fb.group({
       filtro: ['']
     });
@@ -43,7 +41,7 @@ export class ClienteComponent implements OnInit, AfterViewInit {
       { id: 3, nome: 'Brunna Felix Grilo', cpf: '197.816.748-22', dtNascimento: new Date('12/10/1958'), telefone: '(28)9 8574-3838', endereco: { cep: '13070-174' } },
       { id: 4, nome: 'Rosani de Carvalho Ascar', cpf: '024.517.432-04', dtNascimento: new Date('12/05/1974'), telefone: '(89)9 6968-9188', endereco: { cep: '08031-130' } },
       { id: 5, nome: 'Dayvid Chaves Souza', cpf: '667.554.440-30', dtNascimento: new Date('09/03/2019'), telefone: '(95)9 8854-4959', endereco: { cep: '12042-020' } },
-      { id: 6, nome: 'Aderbal Lopez Luques', cpf: '248.630.361-83', dtNascimento: new Date('17/05/1968'), telefone: '(42)9 7155-5281', endereco: { cep: '12906-290' } },
+      { id: 6, nome: 'Aderbal Lopez Luques', cpf: '248.630.361-83', dtNascimento: new Date('05/17/1968'), telefone: '(42)9 7155-5281', endereco: { cep: '12906-290' } },
     ];
     this.dataSource = new MatTableDataSource(this.clientes);
     console.log(this.clientes);
@@ -74,7 +72,7 @@ export class ClienteComponent implements OnInit, AfterViewInit {
 
 
   confirmarExclusao(cliente: Cliente) {
-    const dialogRef = this.dialog.open(ModalConfirmarExcluirComponent, { width: '600px' })
+    let dialogRef = this.dialog.open(ModalConfirmarExcluirComponent, { width: '600px' })
     dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
       if (result) {
         this.limparDados(cliente);
@@ -94,7 +92,9 @@ export class ClienteComponent implements OnInit, AfterViewInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, { width: '600px' })
+    const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, { width: '600px', 
+      
+     })
     dialogRef.afterClosed().subscribe((novoCliente: Cliente) => {
       if (novoCliente) {
         this.modificacaoCliente(novoCliente);
@@ -107,12 +107,22 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     });
   }
 
+  visualizar(cliente : Cliente){
+    let dialogRef = this.dialog.open(ModalCadastrarClienteComponent, 
+      { width: '600px',
+        data: {cliente: cliente, visualizar: true}
+       });
+       dialogRef.afterClosed().subscribe(()=>{
+
+       });
+  }
+
 
 
   editar(cliente: Cliente) {
     const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {
       width: '600px',
-      data: cliente
+      data: { cliente: cliente, visualizar: false }
     });
 
     dialogRef.afterClosed().subscribe((clienteEditado: Cliente) => {

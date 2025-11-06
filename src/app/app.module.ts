@@ -21,7 +21,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 
-import { ConfirmacaoModalComponent } from './core/lib/components/confirmacao-modal/confirmacao-modal/confirmacao-modal.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -39,7 +38,7 @@ let globalFormFieldOptions: MatFormFieldDefaultOptions = {
 
 
 @NgModule({
-  declarations: [AppComponent, ClienteComponent, MedicoComponent, ModalCadastrarClienteComponent, ConfirmacaoModalComponent, ModalConfirmarExcluirComponent, CpfPipe, TelefonePipe, CepPipe],
+  declarations: [AppComponent, ClienteComponent, MedicoComponent, ModalCadastrarClienteComponent, ModalConfirmarExcluirComponent, CpfPipe, TelefonePipe, CepPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
