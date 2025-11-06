@@ -24,8 +24,6 @@ export class ClienteComponent implements OnInit, AfterViewInit {
 
   form: FormGroup;
 
-
-
   constructor(private fb: FormBuilder, private dialog: MatDialog, private ClienteService: ClienteService) {
 
     this.form = this.fb.group({
@@ -44,8 +42,6 @@ export class ClienteComponent implements OnInit, AfterViewInit {
       { id: 6, nome: 'Aderbal Lopez Luques', cpf: '248.630.361-83', dtNascimento: new Date('05/17/1968'), telefone: '(42)9 7155-5281', endereco: { cep: '12906-290', logradouro: 'Rua Sargento Antônio Esteves', numero: '42', complemento: 'casa', bairro: 'Parque Brasil', cidade:'São Paulo', estado: 'São Paulo'}, sexo: 'Masculino' },
     ];
     this.dataSource = new MatTableDataSource(this.clientes);
-    console.log(this.clientes);
-
     this.form = this.fb.group({
       filtro: ['']
     });
