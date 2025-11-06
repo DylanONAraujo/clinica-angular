@@ -39,32 +39,32 @@ export class ToolbarUserDropdownComponent implements OnInit {
     {
       id: '1',
       icon: icAccountCircle,
-      label: 'My Profile',
-      description: 'Personal Information',
+      label: 'Meu perfil',
+      description: 'Informações do Perfil',
       colorClass: 'text-teal',
       route: '/apps/social'
     },
     {
       id: '2',
       icon: icMoveToInbox,
-      label: 'My Inbox',
-      description: 'Messages & Latest News',
+      label: 'Caixa de Entrada',
+      description: 'Menssagens recebida e lidas',
       colorClass: 'text-primary',
       route: '/apps/chat'
     },
     {
       id: '3',
       icon: icListAlt,
-      label: 'My Projects',
-      description: 'Tasks & Active Projects',
+      label: 'Minhas Consultas',
+      description: 'Consultas ativas',
       colorClass: 'text-amber',
       route: '/apps/scrumboard'
     },
     {
       id: '4',
       icon: icTableChart,
-      label: 'Billing Information',
-      description: 'Pricing & Current Plan',
+      label: 'Informações de Consulta',
+      description: 'Informações geral dos pacientes',
       colorClass: 'text-purple',
       route: '/pages/pricing'
     }
@@ -79,13 +79,13 @@ export class ToolbarUserDropdownComponent implements OnInit {
     },
     {
       id: 'away',
-      label: 'Away',
+      label: 'Pausa',
       icon: icAccessTime,
       colorClass: 'text-orange'
     },
     {
       id: 'dnd',
-      label: 'Do not disturb',
+      label: 'Não Pertube',
       icon: icDoNotDisturb,
       colorClass: 'text-red'
     },

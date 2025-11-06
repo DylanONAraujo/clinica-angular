@@ -4,12 +4,12 @@
       <div class="dropdown-heading-icon" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon [icIcon]="icPerson"></mat-icon>
       </div>
-      <div class="dropdown-heading">David Smith</div>
+      <div class="dropdown-heading">Dr. Dylan Araujo</div>
     </div>
 
     <button [matMenuTriggerFor]="settingsMenu"
             mat-icon-button
-            matTooltip="Settings"
+            matTooltip="Configuração"
             matTooltipPosition="before"
             type="button">
       <mat-icon [icIcon]="icSettings" class="notifications-header-icon"></mat-icon>
@@ -46,7 +46,7 @@
         </span>
       </ng-container>
     </button>
-    <a (click)="close()" [routerLink]="['/login']" color="primary" mat-button>LOGOUT</a>
+    <a (click)="close()" [routerLink]="['/login']" color="primary" mat-button>DESLOGAR</a>
   </div>
 </div>
 
@@ -63,21 +63,21 @@
 <mat-menu #settingsMenu="matMenu" xPosition="before" yPosition="below">
   <button mat-menu-item>
     <mat-icon [icIcon]="icBusiness"></mat-icon>
-    <span>Change Address</span>
+    <span>Alterar endereço</span>
   </button>
 
   <button mat-menu-item>
     <mat-icon [icIcon]="icVerifiedUser"></mat-icon>
-    <span>Change Username</span>
+    <span>Alterar nome de usuário</span>
   </button>
 
   <button mat-menu-item>
     <mat-icon [icIcon]="icLock"></mat-icon>
-    <span>Change Password</span>
+    <span>Mudar senha</span>
   </button>
 
   <button mat-menu-item>
     <mat-icon [icIcon]="icNotificationsOff"></mat-icon>
-    <span>Disable Notifications</span>
+    <span>Desativas Notificações</span>
   </button>
 </mat-menu>

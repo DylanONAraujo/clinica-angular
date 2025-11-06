@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, Optional } from '@angular/core';
 import { stagger60ms } from '../../../../../../@vex/animations/stagger.animation';
 import { fadeInUp400ms } from '../../../../../../@vex/animations/fade-in-up.animation';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ClienteService } from '../../../../service/cliente/cliente.service';
+import { Cliente } from '../../../../model/cliente';
 
 
 @Component({
@@ -16,7 +17,11 @@ export class ModalCadastrarClienteComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private cd: ChangeDetectorRef,private fb: FormBuilder, private readonly dialogRef: MatDialogRef<ModalCadastrarClienteComponent>, private clienteService: ClienteService) {
+  constructor(private cd: ChangeDetectorRef,
+    private fb: FormBuilder,
+    private readonly dialogRef: MatDialogRef<ModalCadastrarClienteComponent>,
+    private clienteService: ClienteService, 
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Cliente) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
       cpf: ['', Validators.required],
@@ -33,7 +38,10 @@ export class ModalCadastrarClienteComponent implements OnInit {
     });
    }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    if(this.data){
+      this.dadosPreenchidos(this.data);
+    }
   }
 
 
@@ -55,18 +63,26 @@ export class ModalCadastrarClienteComponent implements OnInit {
     });
   }
 
-  // resetaForm(form){
-  //   this.form.patchValue({
-  //         logradouro: null,
-  //         cep: null,
-  //         bairro: null,
-  //         cidade: null,
-  //         estado: null,
-  //       })
-        
-  // }
   cadastrar(){
     this.dialogRef.close(this.form?.value)
   }
 
+
+
+  dadosPreenchidos(cliente: Cliente) {
+  this.form = this.fb.group({
+      nome: [cliente.nome, Validators.required],
+      cpf: [cliente.cpf, Validators.required],
+      dtNascimento: [cliente.dtNascimento, Validators.required],
+      sexo: [cliente.sexo],
+      telefone: [cliente.telefone, Validators.required],
+      cep: [cliente.endereco.cep, Validators.required],
+      logradouro: [cliente.endereco.logradouro],
+      numero: [cliente.endereco.numero, Validators.required],
+      complemento: [cliente.endereco.complemento],
+      bairro: [cliente.endereco.bairro],
+      cidade: [cliente.endereco.cidade],
+      estado: [cliente.endereco.estado],
+  })
+}
 }

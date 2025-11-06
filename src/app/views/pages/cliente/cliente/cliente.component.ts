@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Cliente } from '../../../../core/model/cliente';
 import { ClienteService } from '../../../../core/service/cliente/cliente.service';
 import { ModalConfirmarExcluirComponent } from '../../../../core/lib/components/modal-cadastrar-cliente/modal-cadastrar-cliente/modal-confirmar-excluir/modal-confirmar-excluir.component';
+import { Endereco } from '../../../../core/model/endereco';
 
 @Component({
   selector: 'vex-cliente',
@@ -17,37 +18,39 @@ import { ModalConfirmarExcluirComponent } from '../../../../core/lib/components/
 export class ClienteComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nome', 'cpf', 'dtNascimento', 'telefone', 'cep', 'actions'];
   dataSource!: MatTableDataSource<Cliente>;
-  clientes: Cliente[] = []; // alterar para receber do backend - Reserva
-
+  clientes: Cliente[] = []; // alterar para receber do backend - Cliente
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
- form: FormGroup;
+  form: FormGroup;
 
- 
+
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, private ClienteService: ClienteService) {
 
     // Assign the data to the data source for the table to render
 
     this.form = this.fb.group({
-      filtro: [''],
-      categoria: [''],
-      status: ['']
+      filtro: ['']
     });
 
   }
 
   ngOnInit() {
-    // this.clientes = [
-    //   { id: 1, nome: 'João Silva', cpf: '123.456.789-10', dtNascimento: new Date('01-10-2023'), telefone:'(10) 98765-4321', cep: '12345-678'},
-    // ];
+    this.clientes = [
+      { id: 1, nome: 'João Silva', cpf: '123.456.789-10', dtNascimento: new Date('01-10-2023'), telefone: '(10) 98765-4321', endereco: { cep: '12345-678' } },
+      { id: 2, nome: 'João Marcos Thomaz Frotté', cpf: '300.629.539-07', dtNascimento: new Date('03/05/1953'), telefone: '(83)9 2483-2341', endereco: { cep: '17021-760' } },
+      { id: 3, nome: 'Brunna Felix Grilo', cpf: '197.816.748-22', dtNascimento: new Date('12/10/1958'), telefone: '(28)9 8574-3838', endereco: { cep: '13070-174' } },
+      { id: 4, nome: 'Rosani de Carvalho Ascar', cpf: '024.517.432-04', dtNascimento: new Date('12/05/1974'), telefone: '(89)9 6968-9188', endereco: { cep: '08031-130' } },
+      { id: 5, nome: 'Dayvid Chaves Souza', cpf: '667.554.440-30', dtNascimento: new Date('09/03/2019'), telefone: '(95)9 8854-4959', endereco: { cep: '12042-020' } },
+      { id: 6, nome: 'Aderbal Lopez Luques', cpf: '248.630.361-83', dtNascimento: new Date('17/05/1968'), telefone: '(42)9 7155-5281', endereco: { cep: '12906-290' } },
+    ];
     this.dataSource = new MatTableDataSource(this.clientes);
     console.log(this.clientes);
-    
+
     this.form = this.fb.group({
-    filtro: ['']
-  });
+      filtro: ['']
+    });
   }
 
   ngAfterViewInit() {
@@ -64,36 +67,41 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     }
   }
 
-  limparFiltro(){
+  limparFiltro() {
     this.form.get('filtro')?.setValue('');
-    this.dataSource.filter = ''; 
+    this.dataSource.filter = '';
   }
 
 
-  confirmarExclusao(cliente: Cliente){
-    const dialogRef = this.dialog.open(ModalConfirmarExcluirComponent, {width: '600px'})
-    dialogRef.afterClosed().subscribe((result: boolean | undefined)=>{
-      if (result){
+  confirmarExclusao(cliente: Cliente) {
+    const dialogRef = this.dialog.open(ModalConfirmarExcluirComponent, { width: '600px' })
+    dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
+      if (result) {
         this.limparDados(cliente);
       }
     });
   }
 
 
-  private limparDados(cliente: Cliente){
+  private limparDados(cliente: Cliente) {
     let indiceRemover = this.clientes.indexOf(cliente);
-    if (indiceRemover > -1){
-          this.clientes.splice(indiceRemover, 1);
-          this.dataSource = new MatTableDataSource(this.clientes);
-    } 
+    if (indiceRemover > -1) {
+      this.clientes.splice(indiceRemover, 1);
+      this.dataSource = new MatTableDataSource(this.clientes);
+      this.dataSource.paginator = this.paginator; 
+      this.dataSource.sort = this.sort;
+    }
   }
 
-  openDialog(){
-    const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {width: '600px'})
+  openDialog() {
+    const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, { width: '600px' })
     dialogRef.afterClosed().subscribe((novoCliente: Cliente) => {
-      if (novoCliente){
+      if (novoCliente) {
+        this.modificacaoCliente(novoCliente);
         this.clientes.push(novoCliente);
         this.dataSource = new MatTableDataSource(this.clientes);
+        this.dataSource.paginator = this.paginator; 
+        this.dataSource.sort = this.sort;
         this.limparFiltro();
       }
     });
@@ -102,20 +110,35 @@ export class ClienteComponent implements OnInit, AfterViewInit {
 
 
   editar(cliente: Cliente) {
-  const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {
-    width: '600px',
-    data: cliente 
-  });
+    const dialogRef = this.dialog.open(ModalCadastrarClienteComponent, {
+      width: '600px',
+      data: cliente
+    });
 
     dialogRef.afterClosed().subscribe((clienteEditado: Cliente) => {
       if (clienteEditado) {
         let indEditado = this.clientes.indexOf(cliente);
         if (indEditado > -1) {
+          this.modificacaoCliente(clienteEditado);
           this.clientes[indEditado] = clienteEditado;
           this.dataSource = new MatTableDataSource(this.clientes);
+          this.dataSource.paginator = this.paginator; 
+          this.dataSource.sort = this.sort;
         }
       }
     });
+  }
+
+  modificacaoCliente(cliente: any) {
+    let endereco = new Endereco();
+    endereco.cep = cliente.cep;
+    endereco.logradouro = cliente.logradouro;
+    endereco.numero = cliente.numero;
+    endereco.complemento = cliente.complemento;
+    endereco.bairro = cliente.bairro;
+    endereco.cidade = cliente.cidade;
+    endereco.estado = cliente.estado;
+    cliente.endereco = endereco;
   }
 }
 

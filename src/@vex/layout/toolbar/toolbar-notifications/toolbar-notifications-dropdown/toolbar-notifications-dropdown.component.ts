@@ -25,42 +25,42 @@ export class ToolbarNotificationsDropdownComponent implements OnInit {
   notifications: Notification[] = [
     {
       id: '1',
-      label: 'New Order Received',
+      label: 'Novo pedido recebido',
       icon: icShoppingBasket,
       colorClass: 'text-primary',
       datetime: DateTime.local().minus({ hour: 1 })
     },
     {
       id: '2',
-      label: 'New customer has registered',
+      label: 'Novo cliente foi registrado',
       icon: icAccountCircle,
       colorClass: 'text-orange',
       datetime: DateTime.local().minus({ hour: 2 })
     },
     {
       id: '3',
-      label: 'Campaign statistics are available',
+      label: 'Estatísticas da campanha disponíveis',
       icon: icInsertChart,
       colorClass: 'text-purple',
       datetime: DateTime.local().minus({ hour: 5 })
     },
     {
       id: '4',
-      label: 'Project has been approved',
+      label: 'Consultas Aprovadas',
       icon: icCheckCircle,
       colorClass: 'text-green',
       datetime: DateTime.local().minus({ hour: 9 })
     },
     {
       id: '5',
-      label: 'Client reports are available',
+      label: 'Relatórios de clientes disponíveis',
       icon: icDescription,
       colorClass: 'text-primary',
       datetime: DateTime.local().minus({ hour: 30 })
     },
     {
       id: '6',
-      label: 'New review received',
+      label: 'Nova avaliação recebida',
       icon: icFeedback,
       colorClass: 'text-orange',
       datetime: DateTime.local().minus({ hour: 40 }),
@@ -68,14 +68,14 @@ export class ToolbarNotificationsDropdownComponent implements OnInit {
     },
     {
       id: '7',
-      label: '22 verified registrations',
+      label: '22 registros verificados',
       icon: icVerifiedUser,
       colorClass: 'text-green',
       datetime: DateTime.local().minus({ hour: 60 })
     },
     {
       id: '8',
-      label: 'New files available',
+      label: 'Novos arquivos disponíveis',
       icon: icFileCopy,
       colorClass: 'text-amber',
       datetime: DateTime.local().minus({ hour: 90 })

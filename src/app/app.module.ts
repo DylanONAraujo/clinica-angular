@@ -10,7 +10,6 @@ import { CustomLayoutModule } from './views/custom-layout/custom-layout.module';
 import { ClienteComponent } from './views/pages/cliente/cliente/cliente.component';
 import { MedicoComponent } from './views/pages/medico/medico/medico.component';
 import { ModalCadastrarClienteComponent } from './core/lib/components/modal-cadastrar-cliente/modal-cadastrar-cliente/modal-cadastrar-cliente.component';
-import { ModalCadastrarMedicoComponent } from './core/lib/components/modal-cadastrar-medico/modal-cadastrar-medico/modal-cadastrar-medico.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,6 +28,9 @@ import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ModalConfirmarExcluirComponent } from './core/lib/components/modal-cadastrar-cliente/modal-cadastrar-cliente/modal-confirmar-excluir/modal-confirmar-excluir.component';
+import { CpfPipe } from './pipes/cpf.pipe';
+import { TelefonePipe } from './pipes/telefone.pipe';
+import { CepPipe } from './pipes/cep.pipe';
 
 
 let globalFormFieldOptions: MatFormFieldDefaultOptions = {
@@ -37,7 +39,7 @@ let globalFormFieldOptions: MatFormFieldDefaultOptions = {
 
 
 @NgModule({
-  declarations: [AppComponent, ClienteComponent, MedicoComponent, ModalCadastrarClienteComponent, ModalCadastrarMedicoComponent, ConfirmacaoModalComponent, ModalConfirmarExcluirComponent],
+  declarations: [AppComponent, ClienteComponent, MedicoComponent, ModalCadastrarClienteComponent, ConfirmacaoModalComponent, ModalConfirmarExcluirComponent, CpfPipe, TelefonePipe, CepPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
